@@ -94,5 +94,6 @@ void updateOrbitalSim(OrbitalSim *sim)
 {
     // Your code goes here...
 
+    // fórmulas de aceleración etc.
 
 }

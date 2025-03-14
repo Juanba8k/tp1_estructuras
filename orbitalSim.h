@@ -1,4 +1,6 @@
-﻿/**
+﻿#include "raymath.h"
+
+/**
  * @brief Orbital simulation
  * @author Marc S. Ressl
  
