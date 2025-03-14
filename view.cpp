@@ -5,8 +5,8 @@
  * @copyright Copyright (c) 2022-2023
  */
 
-#include <time.h>
 
+#include <time.h>
 #include "view.h"
 
 #define WINDOW_WIDTH 1280
@@ -95,8 +95,9 @@ void renderView(View *view, OrbitalSim *sim)
     BeginMode3D(view->camera);
 
     // Fill in your 3D drawing code here:
+    Vector3 vector = {0,0,0};
 
-
+    DrawSphere(vector,1,GOLD);
 
     DrawGrid(10, 10.0f);
     EndMode3D();
