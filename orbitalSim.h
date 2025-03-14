@@ -1,4 +1,4 @@
-﻿#include "raymath.h"
+﻿
 
 /**
  * @brief Orbital simulation
@@ -10,6 +10,10 @@
 
 #ifndef ORBITALSIM_H
 #define ORBITALSIM_H
+
+
+#include "raylib.h"
+#include "raymath.h"
 
 /**
  * @brief Orbital body definition
@@ -31,7 +35,7 @@ struct OrbitalBody
 struct OrbitalSim
 {
     // Fill in your code here...
-    double timeStep, timeTotal;
+    float timeStep, timeTotal;
     int bodyNumber;
     OrbitalBody *bodys;
 

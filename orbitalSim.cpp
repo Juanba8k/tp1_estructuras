@@ -72,7 +72,7 @@ OrbitalSim *constructOrbitalSim(float timeStep)
 
 
 
-    return NULL; // This should return your orbital sim
+    return NULL; //*p ; // This should return your orbital sim
 }
 
 /**
