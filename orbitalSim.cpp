@@ -69,10 +69,16 @@ void configureAsteroid(OrbitalBody *body, float centerMass)
 OrbitalSim *constructOrbitalSim(float timeStep)
 {
     // Your code goes here...
+    OrbitalSim *p; // = new OrbitalSim(solarSystem[]);
+    p->bodyNumber = SOLARSYSTEM_BODYNUM;
+    p->timeStep = 1.0;     //User defined.
 
+    int i;
+    for(i=0 ; i<SOLARSYSTEM_BODYNUM ; i++) {
+        p->bodys[i]->mass = new float(solarSystem[i].mass);
+    }
 
-
-    return NULL; //*p ; // This should return your orbital sim
+    return p; // This should return your orbital sim
 }
 
 /**

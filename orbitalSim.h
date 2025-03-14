@@ -21,12 +21,12 @@
 struct OrbitalBody
 {
     // Fill in your code here...
-    float mass;		  // [kg]
-    float radius;	  // [m]
-    Color color;	  // Raylib color
-    Vector3 position; // [m]
-    Vector3 velocity; // [m/s]
-
+    float* mass;		  // [kg]
+    float* radius;	  // [m]
+    Color* color;	  // Raylib color
+    Vector3* position; // [m]
+    Vector3* velocity; // [m/s]
+//NOTA VER SI ES PUNTEROS
 };
 
 /**
@@ -37,7 +37,7 @@ struct OrbitalSim
     // Fill in your code here...
     float timeStep, timeTotal;
     int bodyNumber;
-    OrbitalBody *bodys;
+    OrbitalBody *bodys[];
 
 };
 
