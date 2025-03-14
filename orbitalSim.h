@@ -1,7 +1,7 @@
 ﻿/**
  * @brief Orbital simulation
  * @author Marc S. Ressl
- *
+ 
  * @copyright Copyright (c) 2022-2023
  */
 
