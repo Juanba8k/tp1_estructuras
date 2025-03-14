@@ -14,7 +14,11 @@
 struct OrbitalBody
 {
     // Fill in your code here...
-
+    float posicion;
+    float velocidad;
+    int masa;
+    int tamaño;
+    int color;
 
 };
 
@@ -24,7 +28,9 @@ struct OrbitalBody
 struct OrbitalSim
 {
     // Fill in your code here...
-
+    double timeStep, timeTotal;
+    int bodyNumber;
+    OrbitalBody *bodys;
 
 };
 
