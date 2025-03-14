@@ -2,6 +2,7 @@
  * @brief Orbital simulation
  * @author Marc S. Ressl
  
+
  * @copyright Copyright (c) 2022-2023
  */
 
@@ -14,11 +15,11 @@
 struct OrbitalBody
 {
     // Fill in your code here...
-    float posicion;
-    float velocidad;
-    int masa;
-    int tamaño;
-    int color;
+    float mass;		  // [kg]
+    float radius;	  // [m]
+    Color color;	  // Raylib color
+    Vector3 position; // [m]
+    Vector3 velocity; // [m/s]
 
 };
 
