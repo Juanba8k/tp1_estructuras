@@ -68,17 +68,22 @@ void configureAsteroid(OrbitalBody *body, float centerMass)
  */
 OrbitalSim *constructOrbitalSim(float timeStep)
 {
-    // Your code goes here...
-    OrbitalSim *p; // = new OrbitalSim(solarSystem[]);
+
+    OrbitalSim *p = new OrbitalSim();
+    p->bodies = new OrbitalBody[SOLARSYSTEM_BODYNUM];
     p->bodyNumber = SOLARSYSTEM_BODYNUM;
     p->timeStep = 1.0;     //User defined.
 
     int i;
     for(i=0 ; i<SOLARSYSTEM_BODYNUM ; i++) {
-        p->bodys[i]->mass = new float(solarSystem[i].mass);
+        p->bodies[i].mass = solarSystem[i].mass;
+        p->bodies[i].radius = solarSystem[i].radius;
+        p->bodies[i].color = solarSystem[i].color;
+        p->bodies[i].position = solarSystem[i].position;
+        p->bodies[i].velocity = solarSystem[i].velocity;
     }
 
-    return p; // This should return your orbital sim
+    return p; // Returns pointer to your new orbital sim.
 }
 
 /**
@@ -87,7 +92,7 @@ OrbitalSim *constructOrbitalSim(float timeStep)
 void destroyOrbitalSim(OrbitalSim *sim)
 {
     // Your code goes here...
-
+    delete sim->bodies;
 
 }
 

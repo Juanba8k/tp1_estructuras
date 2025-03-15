@@ -21,12 +21,11 @@
 struct OrbitalBody
 {
     // Fill in your code here...
-    float* mass;		  // [kg]
-    float* radius;	  // [m]
-    Color* color;	  // Raylib color
-    Vector3* position; // [m]
-    Vector3* velocity; // [m/s]
-//NOTA VER SI ES PUNTEROS
+    float mass;		  // [kg]
+    float radius;	  // [m]
+    Color color;	  // Raylib color
+    Vector3 position; // [m]
+    Vector3 velocity; // [m/s]
 };
 
 /**
@@ -37,7 +36,7 @@ struct OrbitalSim
     // Fill in your code here...
     float timeStep, timeTotal;
     int bodyNumber;
-    OrbitalBody *bodys[];
+    OrbitalBody *bodies;  // Puntero a estructura, se asigna como arreglo de manera dinámica usando new
 
 };
 
