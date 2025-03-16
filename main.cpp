@@ -21,7 +21,7 @@ int main()
 
     while (isViewRendering(view))
     {
-        updateOrbitalSim(sim);
+       updateOrbitalSim(sim);
 
         renderView(view, sim);
     }
