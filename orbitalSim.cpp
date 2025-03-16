@@ -106,6 +106,7 @@ void destroyOrbitalSim(OrbitalSim *sim)
 {
     // Your code goes here...
     delete[] sim->bodies; //check syntaxis
+    delete sim;
 
 }
 
@@ -169,7 +170,7 @@ Vector3 calcForces (OrbitalSim *sim, int index){
             fflush(stdout);
             printf("%f %f %f i:%d\n",sim->bodies[i].position.x,sim->bodies[i].position.y, sim->bodies[i].position.z,i);
             fflush(stdout);
-            sleep(1);
+           // sleep(1);
 
 
             float vectorModule = Vector3DistanceSqr(sim->bodies[index].position,sim->bodies[i].position);
