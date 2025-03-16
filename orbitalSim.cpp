@@ -156,6 +156,8 @@ Vector3 calcForces (OrbitalSim *sim, int index){
     Vector3 totalForce = Vector3Zero();
 
     for(i=0;i<SOLARSYSTEM_BODYNUM;i++){
+        printf("vuelta:%d\n",i);
+        fflush(stdout);
 
         if(i==index){ //skip
         }
@@ -163,20 +165,25 @@ Vector3 calcForces (OrbitalSim *sim, int index){
             float force;
             float m2 =sim->bodies[i].mass;
 
-            printf("%f %f %f index:%d\n",sim->bodies[index].position.x,sim->bodies[index].position.y, sim->bodies[index].position.z,index); //el error estaria por aca
+            printf("%f %f %f index:%d\n",sim->bodies[index].position.x,sim->bodies[index].position.y, sim->bodies[index].position.z,index); 
             fflush(stdout);
-            printf("%f %f %f i:%d\n",sim->bodies[i].position.x,sim->bodies[i].position.y, sim->bodies[i].position.z,index);
+            printf("%f %f %f i:%d\n",sim->bodies[i].position.x,sim->bodies[i].position.y, sim->bodies[i].position.z,i);
             fflush(stdout);
-            sleep(2);
+            sleep(1);
+
+
             float vectorModule = Vector3DistanceSqr(sim->bodies[index].position,sim->bodies[i].position);
-            printf("vector modulo %f\n",vectorModule);
-             fflush(stdout);
+
             if (vectorModule<0.1){ //it makes sure it's not dividing by cero
                 vectorModule = 1;
             }
 
-            force = (-(GRAVITATIONAL_CONSTANT*m1*m2)/vectorModule);
+            printf("vector module %f\n",vectorModule);
+            force = -((GRAVITATIONAL_CONSTANT*m1*m2)/vectorModule); //el problema está aca, el vector module esta bien, peero me da infinito
 
+            printf("force %f vuelta %d", force, i);
+            fflush(stdout);
+            
             Vector3 normal = Vector3Zero();
             normal = Vector3Subtract(sim->bodies[index].position,sim->bodies[i].position); //Create a normal vector and multiply it by the force to obtain force vector
             normal = Vector3Normalize(normal);
@@ -184,7 +191,12 @@ Vector3 calcForces (OrbitalSim *sim, int index){
 
             totalForce = Vector3Add(totalForce, normal);
 
+            printf("total force es  %f %f %f en la vuelta:%d\n",totalForce.x,totalForce.y, totalForce.z,i); //el error estaria por aca
+            fflush(stdout);
+
         }
     }
+    printf("reeturn %f %f %f  \n",totalForce.x,totalForce.y, totalForce.z); //el error estaria por aca
+    fflush(stdout);
     return totalForce;
 }
