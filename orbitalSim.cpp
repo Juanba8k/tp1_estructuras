@@ -83,12 +83,12 @@ OrbitalSim *constructOrbitalSim(float timeStep)
 {
 
     OrbitalSim *p = new OrbitalSim();
-    p->bodies = new OrbitalBody[SOLARSYSTEM_BODYNUM];
     p->bodyNumber = SOLARSYSTEM_BODYNUM;
+    p->bodies = new OrbitalBody[p->bodyNumber];
     p->timeStep = timeStep;     //User defined.
 
     int i;
-    for(i=0 ; i<SOLARSYSTEM_BODYNUM ; i++) {
+    for(i=0 ; i < p->bodyNumber ; i++) {
         p->bodies[i].mass = solarSystem[i].mass;
         p->bodies[i].radius = solarSystem[i].radius;
         p->bodies[i].color = solarSystem[i].color;
@@ -115,15 +115,15 @@ void destroyOrbitalSim(OrbitalSim *sim)
  *
  * @param sim The orbital simulation
  */
-void updateOrbitalSim(OrbitalSim *sim)
+void updateOrbitalSim(OrbitalSim *sim) 
 {
     // Your code goes here...
     int index;
 
-    for (index=1; index<SOLARSYSTEM_BODYNUM; index++){
+    for (index=1 ; index < sim->bodyNumber ; index++){    //Nota: Usar bodyNumber como cota.
     
     float mass = sim->bodies[index].mass;
-    float timestep =sim->timeStep;
+    float timestep = sim->timeStep;
     Vector3 force, aceleration;
 
 
@@ -152,19 +152,17 @@ void updateOrbitalSim(OrbitalSim *sim)
 
 Vector3 calcForces (OrbitalSim *sim, int index){
     int i;
-    float m1=sim->bodies[index].mass,m2;
+    float m1 = sim->bodies[index].mass , m2;
 
     Vector3 totalForce = Vector3Zero();
 
-    for(i=0;i<SOLARSYSTEM_BODYNUM;i++){
-        printf("vuelta:%d\n",i);
+    for(i=0 ; i < sim->bodyNumber ; i++){
+        printf("vuelta: %d\n",i);
         fflush(stdout);
 
-        if(i==index){ //skip
-        }
-        else{
+        if(i!=index){   //skip (no comparar consigo mismo)
             float force;
-            float m2 =sim->bodies[i].mass;
+            float m2 = sim->bodies[i].mass;
 
             printf("%f %f %f index:%d\n",sim->bodies[index].position.x,sim->bodies[index].position.y, sim->bodies[index].position.z,index); 
             fflush(stdout);
@@ -173,20 +171,22 @@ Vector3 calcForces (OrbitalSim *sim, int index){
            // sleep(1);
 
 
-            float vectorModule = Vector3DistanceSqr(sim->bodies[index].position,sim->bodies[i].position);
+            float vectorModule = Vector3DistanceSqr(sim->bodies[index].position,sim->bodies[i].position);   //norma al cuadrado.
 
             if (vectorModule<0.1){ //it makes sure it's not dividing by cero
-                vectorModule = 1;
+                vectorModule = 0.1;
             }
 
             printf("vector module %f\n",vectorModule);
-            force = -((GRAVITATIONAL_CONSTANT*m1*m2)/vectorModule); //el problema está aca, el vector module esta bien, peero me da infinito
+            force = -(GRAVITATIONAL_CONSTANT/vectorModule); //el problema está aca, el vector module esta bien, peero me da infinito
+                    //      CAMBIOS:
+                    // Ahorro cálculo despreciando masas (ver consigna)
 
             printf("force %f vuelta %d", force, i);
             fflush(stdout);
             
             Vector3 normal = Vector3Zero();
-            normal = Vector3Subtract(sim->bodies[index].position,sim->bodies[i].position); //Create a normal vector and multiply it by the force to obtain force vector
+            normal = Vector3Subtract(sim->bodies[index].position, sim->bodies[i].position); //Create a normal vector and multiply it by the force to obtain force vector
             normal = Vector3Normalize(normal);
             normal = Vector3Scale(normal,force);
 
@@ -197,7 +197,7 @@ Vector3 calcForces (OrbitalSim *sim, int index){
 
         }
     }
-    printf("reeturn %f %f %f  \n",totalForce.x,totalForce.y, totalForce.z); //el error estaria por aca
+    printf("return %f %f %f  \n",totalForce.x,totalForce.y, totalForce.z); //el error estaria por aca
     fflush(stdout);
     return totalForce;
 }
