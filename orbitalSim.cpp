@@ -23,11 +23,11 @@
  */
 
  /**
-  * @brief Calculates the total force that a planet is recieving from the others planets
+  * @brief Calculates the acceleration of a planet
   * @param index is the index that point to the planet which is beeing calculated
   * @param sim pointer that contains all the planets data
   */
- Vector3 calcForces (OrbitalSim *sim, int index);
+ Vector3 calcAcceleration (OrbitalSim *sim, int index);
 
 
 /**
@@ -104,8 +104,8 @@ OrbitalSim *constructOrbitalSim(float timeStep)
  */
 void destroyOrbitalSim(OrbitalSim *sim)
 {
-    // Your code goes here...
-    delete[] sim->bodies; //check syntaxis
+
+    delete[] sim->bodies;
     delete sim;
 
 }
@@ -117,7 +117,6 @@ void destroyOrbitalSim(OrbitalSim *sim)
  */
 void updateOrbitalSim(OrbitalSim *sim) 
 {
-    // Your code goes here...
     int index;
 
     for (index=1 ; index < sim->bodyNumber ; index++){    //Nota: Usar bodyNumber como cota.
@@ -126,50 +125,25 @@ void updateOrbitalSim(OrbitalSim *sim)
     float timestep = sim->timeStep;
     Vector3 force, aceleration;
 
-
-    force = calcForces(sim,index);
-    aceleration = Vector3Scale(force, (1/(sim->bodies[index].mass))); //Calculates aceleration vector
-    //aceleration.x= (force.x/mass);
-    //aceleration.y= (force.y/mass);
-    //aceleration.z= (force.y/mass);
-
-    //sim->bodies[index].velocity.x= (sim->bodies[index].velocity.x) + (aceleration.x * timestep);
-   // sim->bodies[index].velocity.y= (sim->bodies[index].velocity.y) + (aceleration.y * timestep);
-    //sim->bodies[index].velocity.z= (sim->bodies[index].velocity.z) + (aceleration.z * timestep);
+    aceleration = calcAcceleration(sim,index); //Calculates aceleration vector
 
     sim->bodies[index].velocity = Vector3Add(sim->bodies[index].velocity, Vector3Scale(aceleration,sim->timeStep) ); //Calculates and saves the new velocity
-
-    //sim->bodies[index].position.x= (sim->bodies[index].position.x) + ((sim->bodies[index].velocity.x)*timestep);
-    //sim->bodies[index].position.y= (sim->bodies[index].position.y) + ((sim->bodies[index].velocity.y)*timestep);
-    //sim->bodies[index].position.z= (sim->bodies[index].position.z) + ((sim->bodies[index].velocity.z)*timestep);
 
     sim->bodies[index].position = Vector3Add(sim->bodies[index].position, Vector3Scale(sim->bodies[index].velocity,sim->timeStep)); //Calculates and saves the new position
 
     }
-    // fórmulas de aceleración etc.
 
 }
 
-Vector3 calcForces (OrbitalSim *sim, int index){
+Vector3 calcAcceleration (OrbitalSim *sim, int index){
     int i;
-    float m1 = sim->bodies[index].mass , m2;
-
-    Vector3 totalForce = Vector3Zero();
+    Vector3 totalAcceleration = Vector3Zero();
 
     for(i=0 ; i < sim->bodyNumber ; i++){
-        printf("vuelta: %d\n",i);
-        fflush(stdout);
 
         if(i!=index){   //skip (no comparar consigo mismo)
-            float force;
+            float acceleration;
             float m2 = sim->bodies[i].mass;
-
-            printf("%f %f %f index:%d\n",sim->bodies[index].position.x,sim->bodies[index].position.y, sim->bodies[index].position.z,index); 
-            fflush(stdout);
-            printf("%f %f %f i:%d\n",sim->bodies[i].position.x,sim->bodies[i].position.y, sim->bodies[i].position.z,i);
-            fflush(stdout);
-           // sleep(1);
-
 
             float vectorModule = Vector3DistanceSqr(sim->bodies[index].position,sim->bodies[i].position);   //norma al cuadrado.
 
@@ -177,27 +151,16 @@ Vector3 calcForces (OrbitalSim *sim, int index){
                 vectorModule = 0.1;
             }
 
-            printf("vector module %f\n",vectorModule);
-            force = -(GRAVITATIONAL_CONSTANT/vectorModule); //el problema está aca, el vector module esta bien, peero me da infinito
-                    //      CAMBIOS:
-                    // Ahorro cálculo despreciando masas (ver consigna)
 
-            printf("force %f vuelta %d", force, i);
-            fflush(stdout);
+            acceleration = -((GRAVITATIONAL_CONSTANT*m2)/vectorModule);
             
             Vector3 normal = Vector3Zero();
             normal = Vector3Subtract(sim->bodies[index].position, sim->bodies[i].position); //Create a normal vector and multiply it by the force to obtain force vector
             normal = Vector3Normalize(normal);
-            normal = Vector3Scale(normal,force);
+            normal = Vector3Scale(normal,acceleration);
 
-            totalForce = Vector3Add(totalForce, normal);
-
-            printf("total force es  %f %f %f en la vuelta:%d\n",totalForce.x,totalForce.y, totalForce.z,i); //el error estaria por aca
-            fflush(stdout);
-
+            totalAcceleration = Vector3Add(totalAcceleration, normal);
         }
     }
-    printf("return %f %f %f  \n",totalForce.x,totalForce.y, totalForce.z); //el error estaria por aca
-    fflush(stdout);
-    return totalForce;
+    return totalAcceleration;
 }
