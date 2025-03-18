@@ -119,7 +119,7 @@ void updateOrbitalSim(OrbitalSim *sim)
 {
     int index;
 
-    for (index=1 ; index < sim->bodyNumber ; index++){    //Nota: Usar bodyNumber como cota.
+    for (index=0 ; index < sim->bodyNumber ; index++){    //Nota: Usar bodyNumber como cota.
     
     float mass = sim->bodies[index].mass;
     float timestep = sim->timeStep;
