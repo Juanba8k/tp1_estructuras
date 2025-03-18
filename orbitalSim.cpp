@@ -97,7 +97,7 @@ OrbitalSim *constructOrbitalSim(float timeStep)
         p->bodies[i].velocity = solarSystem[i].velocity;
     }
     for(i = SOLARSYSTEM_BODYNUM ; i < ASTEROID_BODYNUM ; i++) {
-        configureAsteroid(& p->bodies[i], solarSystem->mass);    //No sobreescribe los planetas ya cargados.
+        configureAsteroid(& p->bodies[i], solarSystem->mass);    //Masa del sol
     }
 
     return p; // Returns pointer to your new orbital sim.
