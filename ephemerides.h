@@ -102,6 +102,7 @@ EphemeridesBody solarSystem[] = {
 };
 
 #define SOLARSYSTEM_BODYNUM (sizeof(solarSystem) / sizeof(EphemeridesBody))
+#define ASTEROID_BODYNUM 500
 
 /**
  * Alpha Centauri system ephermerides for 2022-01-01T00:00:00Z

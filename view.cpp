@@ -105,8 +105,8 @@ void renderView(View *view, OrbitalSim *sim)
     EndMode3D();
 
     // Fill in your 2D drawing code here:
-
-
+    DrawFPS(0,24);
+    DrawText(getISODate(sim->timeTotal), 0, 0, 20, GREEN);  //No funciona, no sé actualizar el tiempo
 
     EndDrawing();
 }

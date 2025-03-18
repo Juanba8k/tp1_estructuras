@@ -66,11 +66,11 @@ void configureAsteroid(OrbitalBody *body, float centerMass)
     float vy = getRandomFloat(-1E2F, 1E2F);
 
     // Fill in with your own fields:
-    // body->mass = 1E12F;  // Typical asteroid weight: 1 billion tons
-    // body->radius = 2E3F; // Typical asteroid radius: 2km
-    // body->color = GRAY;
-    // body->position = {r * cosf(phi), 0, r * sinf(phi)};
-    // body->velocity = {-v * sinf(phi), vy, v * cosf(phi)};
+    body->mass = 1E12F;  // Typical asteroid weight: 1 billion tons
+    body->radius = 2E3F; // Typical asteroid radius: 2km
+    body->color = GRAY;
+    body->position = {r * cosf(phi), 0, r * sinf(phi)};
+    body->velocity = {-v * sinf(phi), vy, v * cosf(phi)};
 }
 
 /**
@@ -83,17 +83,21 @@ OrbitalSim *constructOrbitalSim(float timeStep)
 {
 
     OrbitalSim *p = new OrbitalSim();
-    p->bodyNumber = SOLARSYSTEM_BODYNUM;
+    p->bodyNumber = SOLARSYSTEM_BODYNUM+ASTEROID_BODYNUM;
     p->bodies = new OrbitalBody[p->bodyNumber];
     p->timeStep = timeStep;     //User defined.
+    p->timeTotal = 0;
 
     int i;
-    for(i=0 ; i < p->bodyNumber ; i++) {
+    for(i=0 ; i < SOLARSYSTEM_BODYNUM ; i++) {
         p->bodies[i].mass = solarSystem[i].mass;
         p->bodies[i].radius = solarSystem[i].radius;
         p->bodies[i].color = solarSystem[i].color;
         p->bodies[i].position = solarSystem[i].position;
         p->bodies[i].velocity = solarSystem[i].velocity;
+    }
+    for(i = SOLARSYSTEM_BODYNUM ; i < ASTEROID_BODYNUM ; i++) {
+        configureAsteroid(& p->bodies[i], solarSystem->mass);    //No sobreescribe los planetas ya cargados.
     }
 
     return p; // Returns pointer to your new orbital sim.
@@ -122,7 +126,6 @@ void updateOrbitalSim(OrbitalSim *sim)
     for (index=0 ; index < sim->bodyNumber ; index++){    //Nota: Usar bodyNumber como cota.
     
     float mass = sim->bodies[index].mass;
-    float timestep = sim->timeStep;
     Vector3 force, aceleration;
 
     aceleration = calcAcceleration(sim,index); //Calculates aceleration vector
