@@ -17,13 +17,13 @@ Al trabajar con floats y considerar un time step muy alto, hay overflow, lo que 
 
 ## Complejidad computacional con asteroides
 
-O(N)
+La complejidad computacional del programa es O(N²).
 
 ## Mejora de la complejidad computacional
 
-[completar]
+Despreciamos el efecto de órbita que tienen los asteroides, siendo que su masa es de 10 órdenes menor. Al acotar las comparaciones, se incrementa la eficiencia de 4fps a 32fps en nuestra computadora y no se observan cambios significativos en la simulación.
 
 ## Bonus points
 Al multiplicar la masa de Jupiter por 1000, el sol empieza a orbitar alrededor del mismo, y al mismo tiempo todos los otros planetas salen despedidos de la orbita. Al mismo tiempo, como no hay colisiones, los planetas al juntarse, se atraviezan y salen disparados.
 
-
+El easter egg encontrado se encuentra al cargar los asteroides, permitiendo cargarlos sobre un mismo eje (sin desfase).
