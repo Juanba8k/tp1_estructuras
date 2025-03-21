@@ -8,7 +8,8 @@
 
 ## Verificación del timestep
 
-[completar]
+El timestep funciona correctamente con valores bajos, pero al simular varios años por segundo los planetas cercanos abandonan su órbita. Al elegir un timestep de 1 día por segundo, no se ve reflejado en el paso del tiempo.
+Ocurre un overflow al timestep cuando seleccionamos un paso de 100 años por segundo.
 
 ## Verificación del tipo de datos float
 
