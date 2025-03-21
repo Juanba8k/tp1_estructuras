@@ -17,12 +17,13 @@ Al trabajar con floats y considerar un time step muy alto, hay overflow, lo que 
 
 ## Complejidad computacional con asteroides
 
-[completar]
+O(N)
 
 ## Mejora de la complejidad computacional
 
 [completar]
 
 ## Bonus points
+Al multiplicar la masa de Jupiter por 1000, el sol empieza a orbitar alrededor del mismo, y al mismo tiempo todos los otros planetas salen despedidos de la orbita. Al mismo tiempo, como no hay colisiones, los planetas al juntarse, se atraviezan y salen disparados.
 
-[completar]
+
