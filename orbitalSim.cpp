@@ -19,7 +19,7 @@
 #define ASTEROIDS_MEAN_RADIUS 4E11F
 
 /**
- * PROTOTIPES
+ * PROTOTPES
  */
 
  /**
@@ -27,7 +27,7 @@
   * @param index is the index that point to the planet which is beeing calculated
   * @param sim pointer that contains all the planets data
   */
- Vector3 calcAcceleration (OrbitalSim *sim, int index);
+ static Vector3 calcAcceleration (OrbitalSim *sim, int index);
 
 
 /**
@@ -65,7 +65,6 @@ void configureAsteroid(OrbitalBody *body, float centerMass)
     float v = sqrtf(GRAVITATIONAL_CONSTANT * centerMass / r) * getRandomFloat(0.6F, 1.2F);
     float vy = getRandomFloat(-1E2F, 1E2F);
 
-    // Fill in with your own fields:
     body->mass = 1E12F;  // Typical asteroid weight: 1 billion tons
     body->radius = 2E3F; // Typical asteroid radius: 2km
     body->color = GRAY;
@@ -139,7 +138,7 @@ void updateOrbitalSim(OrbitalSim *sim)
 
 }
 
-Vector3 calcAcceleration (OrbitalSim *sim, int index){
+static Vector3 calcAcceleration (OrbitalSim *sim, int index){
     int i;
     Vector3 totalAcceleration = Vector3Zero();
 
