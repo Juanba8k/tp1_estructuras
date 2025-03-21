@@ -141,9 +141,9 @@ static Vector3 calcAcceleration (OrbitalSim *sim, int index){
     int i;
     Vector3 totalAcceleration = Vector3Zero();
 
-    for(i=0 ; i < sim->bodyNumber ; i++){
+    for(i=0 ; i < SOLARSYSTEM_BODYNUM ; i++){
 
-        if(i!=index){   //skip (no comparar consigo mismo)
+        if(i!=index){   //skips so as not to compaire to it self  (no comparar consigo mismo)
             float acceleration;
             float m2 = sim->bodies[i].mass;
 
