@@ -96,7 +96,7 @@ void renderView(View *view, OrbitalSim *sim)
     
     int i;
     for(i=0 ; i<sim->bodyNumber ; i++) {
-        DrawSphere( Vector3Scale(sim->bodies[i].position, 1E-11),     //Factor de escala: 1E-11
+        DrawSphere( Vector3Scale(sim->bodies[i].position, 1E-11),     //Scale factor: 1E-11
                     0.005F * logf(sim->bodies[i].radius),
                     sim->bodies[i].color    );
     }
@@ -104,9 +104,9 @@ void renderView(View *view, OrbitalSim *sim)
     DrawGrid(10, 10.0f);
     EndMode3D();
 
-    // Fill in your 2D drawing code here:
+
     DrawFPS(0,24);
-    DrawText(getISODate(sim->timeTotal), 0, 0, 20, GREEN);  //No funciona, no sé actualizar el tiempo
+    DrawText(getISODate(sim->timeTotal), 0, 0, 20, GREEN); 
 
     EndDrawing();
 }

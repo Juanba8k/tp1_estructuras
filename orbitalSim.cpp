@@ -124,14 +124,14 @@ void updateOrbitalSim(OrbitalSim *sim)
 
     for (index=0 ; index < sim->bodyNumber ; index++){    //Nota: Usar bodyNumber como cota.
     
-    float mass = sim->bodies[index].mass;
-    Vector3 force, aceleration;
+        float mass = sim->bodies[index].mass;
+        Vector3 force, aceleration;
 
-    aceleration = calcAcceleration(sim,index); //Calculates aceleration vector
+        aceleration = calcAcceleration(sim,index); //Calculates aceleration vector
 
-    sim->bodies[index].velocity = Vector3Add(sim->bodies[index].velocity, Vector3Scale(aceleration,sim->timeStep) ); //Calculates and saves the new velocity
+        sim->bodies[index].velocity = Vector3Add(sim->bodies[index].velocity, Vector3Scale(aceleration,sim->timeStep) ); //Calculates and saves the new velocity
 
-    sim->bodies[index].position = Vector3Add(sim->bodies[index].position, Vector3Scale(sim->bodies[index].velocity,sim->timeStep)); //Calculates and saves the new position
+        sim->bodies[index].position = Vector3Add(sim->bodies[index].position, Vector3Scale(sim->bodies[index].velocity,sim->timeStep)); //Calculates and saves the new position
 
     }
 
@@ -141,7 +141,7 @@ static Vector3 calcAcceleration (OrbitalSim *sim, int index){
     int i;
     Vector3 totalAcceleration = Vector3Zero();
 
-    for(i=0 ; i < SOLARSYSTEM_BODYNUM ; i++){
+    for(i=0 ; i < SOLARSYSTEM_BODYNUM ; i++){ 
 
         if(i!=index){   //skips so as not to compaire to it self  (no comparar consigo mismo)
             float acceleration;
