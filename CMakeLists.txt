@@ -4,7 +4,7 @@ project("orbitalsim")
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories(/Users/juancorreauranga/dev/vcpkg/buildtrees/raylib/x64-osx-dbg/raylib/include)
+include_directories(/home/amilani/dev/vcpkg/buildtrees/raylib/x64-linux-dbg/raylib/include)
 # From "Working with CMake" documentation:
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" OR ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # AddressSanitizer (ASan)

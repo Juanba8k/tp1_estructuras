@@ -121,6 +121,7 @@ void destroyOrbitalSim(OrbitalSim *sim)
  */
 void updateOrbitalSim(OrbitalSim *sim) 
 {
+    sim->timeTotal += sim->timeStep;
     int index;
 
     for (index=0 ; index < sim->bodyNumber ; index++){    //Nota: Usar bodyNumber como cota.
