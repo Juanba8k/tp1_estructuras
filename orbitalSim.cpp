@@ -82,7 +82,7 @@ OrbitalSim *constructOrbitalSim(float timeStep)
 {
 
     OrbitalSim *p = new OrbitalSim();
-    p->bodyNumber = SOLARSYSTEM_BODYNUM+ASTEROID_BODYNUM;
+    p->bodyNumber = SOLARSYSTEM_BODYNUM+ASTEROID_BODYNUM; //
     p->bodies = new OrbitalBody[p->bodyNumber];
     p->timeStep = timeStep;     //User defined.
     p->timeTotal = 0;
@@ -95,10 +95,9 @@ OrbitalSim *constructOrbitalSim(float timeStep)
         p->bodies[i].position = solarSystem[i].position;
         p->bodies[i].velocity = solarSystem[i].velocity;
     }
-    for(i = SOLARSYSTEM_BODYNUM ; i < ASTEROID_BODYNUM ; i++) {
-        configureAsteroid(& p->bodies[i], solarSystem->mass);    //Masa del sol
+    for(i = SOLARSYSTEM_BODYNUM ; i < (ASTEROID_BODYNUM+SOLARSYSTEM_BODYNUM) ; i++) { //
+        configureAsteroid(& p->bodies[i], solarSystem->mass);   
     }
-
     return p; // Returns pointer to your new orbital sim.
 }
 
