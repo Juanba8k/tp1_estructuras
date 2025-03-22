@@ -26,12 +26,12 @@
  * LOCAL PROTOTPES
  */
 
- /**
-  * @brief Calculates the acceleration of a planet
-  * @param index is the index that point to the planet which is beeing calculated
-  * @param sim pointer that contains all the planets data
-  */
- static Vector3 calcAcceleration (OrbitalSim *sim, int index);
+/**
+* @brief Calculates the acceleration of a planet
+* @param index is the index that point to the planet which is beeing calculated
+* @param sim pointer that contains all the planets data
+*/
+static Vector3 calcAcceleration (OrbitalSim *sim, int index);
 
 /**
  * FUNCTIONS
