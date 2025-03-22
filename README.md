@@ -22,6 +22,7 @@ La complejidad computacional del programa es O(N²).
 ## Mejora de la complejidad computacional
 
 Despreciamos el efecto de órbita que tienen los asteroides, siendo que su masa es de 10 órdenes menor. Al acotar las comparaciones, se incrementa la eficiencia de 4fps a 32fps en nuestra computadora y no se observan cambios significativos en la simulación.
+Además, al alejar la cámara de manera significativa, los objetos se renderizarán como líneas y no como esferas, a fin de mejorar la velocidad de ejecución.
 
 ## Bonus points
 Al multiplicar la masa de Jupiter por 1000, el sol empieza a orbitar alrededor del mismo, y al mismo tiempo todos los otros planetas salen despedidos de la orbita. Al mismo tiempo, como no hay colisiones, los planetas al juntarse, se atraviezan y salen disparados.
