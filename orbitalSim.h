@@ -37,7 +37,7 @@ struct OrbitalSim
     float timeStep, timeTotal;
     int bodyNumber;
     OrbitalBody *bodies;  // Puntero a estructura, se asigna como arreglo de manera dinámica usando new
-
+    float centerMass;
 };
 
 OrbitalSim *constructOrbitalSim(float timeStep);

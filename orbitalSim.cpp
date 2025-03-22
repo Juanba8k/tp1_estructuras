@@ -18,8 +18,12 @@
 #define GRAVITATIONAL_CONSTANT 6.6743E-11F
 #define ASTEROIDS_MEAN_RADIUS 4E11F
 
+
+#define SISTEM_BODYNUM (SOLARSYSTEM_BODYNUM) //This must be defined with the number of planets in the sistem that will be display
+#define SISTEM_EPHEMERIDES (solarSystem) //This must contain the name of the EphemeridesBody struct which contains the data from all the bodies in the solar sistem that will be display
+
 /**
- * PROTOTPES
+ * LOCAL PROTOTPES
  */
 
  /**
@@ -29,6 +33,9 @@
   */
  static Vector3 calcAcceleration (OrbitalSim *sim, int index);
 
+/**
+ * FUNCTIONS
+ */
 
 /**
  * @brief Gets a uniform random value in a range
@@ -82,21 +89,23 @@ OrbitalSim *constructOrbitalSim(float timeStep)
 {
 
     OrbitalSim *p = new OrbitalSim();
-    p->bodyNumber = SOLARSYSTEM_BODYNUM+ASTEROID_BODYNUM; //
+    p->bodyNumber = SISTEM_BODYNUM+ASTEROID_BODYNUM; //
     p->bodies = new OrbitalBody[p->bodyNumber];
     p->timeStep = timeStep;     //User defined.
     p->timeTotal = 0;
+    EphemeridesBody *sistemBody = SISTEM_EPHEMERIDES; 
 
+    p->centerMass = sistemBody[0].mass; //For the code functioning, the first planet define in Ephemeride sistembody, must be the center mass
     int i;
-    for(i=0 ; i < SOLARSYSTEM_BODYNUM ; i++) {
-        p->bodies[i].mass = solarSystem[i].mass;
-        p->bodies[i].radius = solarSystem[i].radius;
-        p->bodies[i].color = solarSystem[i].color;
-        p->bodies[i].position = solarSystem[i].position;
-        p->bodies[i].velocity = solarSystem[i].velocity;
+    for(i=0 ; i < SISTEM_BODYNUM ; i++) {
+        p->bodies[i].mass = sistemBody[i].mass;
+        p->bodies[i].radius = sistemBody[i].radius;
+        p->bodies[i].color = sistemBody[i].color;
+        p->bodies[i].position = sistemBody[i].position;
+        p->bodies[i].velocity = sistemBody[i].velocity;
     }
-    for(i = SOLARSYSTEM_BODYNUM ; i < (ASTEROID_BODYNUM+SOLARSYSTEM_BODYNUM) ; i++) { //
-        configureAsteroid(& p->bodies[i], solarSystem->mass);   
+    for(i = SISTEM_BODYNUM ; i < (ASTEROID_BODYNUM+SISTEM_BODYNUM) ; i++) { //
+        configureAsteroid(& p->bodies[i], p->centerMass);   
     }
     return p; // Returns pointer to your new orbital sim.
 }
@@ -137,11 +146,15 @@ void updateOrbitalSim(OrbitalSim *sim)
 
 }
 
+/**
+ * LOCAL FUNCTIONS
+ */
+
 static Vector3 calcAcceleration (OrbitalSim *sim, int index){
     int i;
     Vector3 totalAcceleration = Vector3Zero();
 
-    for(i=0 ; i < SOLARSYSTEM_BODYNUM ; i++){ 
+    for(i=0 ; i < SISTEM_BODYNUM ; i++){ //We don't use the asteroid mass, because it's too small in comparison with the main planets we are studing
 
         if(i!=index){   //skips so as not to compaire to it self  (no comparar consigo mismo)
             float acceleration;
