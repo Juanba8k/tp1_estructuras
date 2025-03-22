@@ -4,7 +4,10 @@
 
 * [Nombre]: [contribución]
 
-[completar]
+    Juan Bautista Correa Uranga: desarrollo de la función update orbital sim, mejoras en la eficiencia y portabilidad para usarse con otros sistemas solares.
+
+    Augusto Milani: Creación de estructuras de datos y inicializacion de los mismos, display, mejoras de eficiencia en el display.
+
 
 ## Verificación del timestep
 
@@ -21,10 +24,12 @@ La complejidad computacional del programa es O(N²).
 
 ## Mejora de la complejidad computacional
 
-Despreciamos el efecto de órbita que tienen los asteroides, siendo que su masa es de 10 órdenes menor. Al acotar las comparaciones, se incrementa la eficiencia de 4fps a 32fps en nuestra computadora y no se observan cambios significativos en la simulación.
-Además, al alejar la cámara de manera significativa, los objetos se renderizarán como líneas y no como esferas, a fin de mejorar la velocidad de ejecución.
+Despreciamos el efecto de órbita que tienen los asteroides, siendo que su masa es de 10 órdenes menor. Al acotar las comparaciones, se incrementa la eficiencia de 4fps a 32fps en nuestra computadora menos potente y no se observan cambios significativos en la simulación. En la computadora con un procesador mejor funciona a 58 fps.
+Además, al alejar la cámara de manera significativa, los objetos se renderizarán como líneas y no como esferas, a fin de mejorar la velocidad de ejecución. Al hacer esto último, la simulacion corre a 60 fps en ambas compturadoras.
 
 ## Bonus points
 Al multiplicar la masa de Jupiter por 1000, el sol empieza a orbitar alrededor del mismo, y al mismo tiempo todos los otros planetas salen despedidos de la orbita. Al mismo tiempo, como no hay colisiones, los planetas al juntarse, se atraviezan y salen disparados.
 
 El easter egg encontrado se encuentra al cargar los asteroides, permitiendo cargarlos sobre un mismo eje (sin desfase).
+
+Se crearon dos constantes en orbitalSim.cpp llamadas SISTEM_BODYNUM y SISTEM_EPHEMERIDES, las cuales deben ser cambiadas y permite que el código pueda usarse para simular otros sistemas solares, con planetas diferentes. En este caso se probó también con Alfa Centauri, mostrando dos estrellas que orbitaban en una circunferencia.

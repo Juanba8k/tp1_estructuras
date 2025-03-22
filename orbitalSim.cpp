@@ -104,7 +104,7 @@ OrbitalSim *constructOrbitalSim(float timeStep)
         p->bodies[i].position = sistemBody[i].position;
         p->bodies[i].velocity = sistemBody[i].velocity;
     }
-    for(i = SISTEM_BODYNUM ; i < (ASTEROID_BODYNUM+SISTEM_BODYNUM) ; i++) { //
+    for(i = SISTEM_BODYNUM ; i < (ASTEROID_BODYNUM+SISTEM_BODYNUM) ; i++) { 
         configureAsteroid(& p->bodies[i], p->centerMass);   
     }
     return p; // Returns pointer to your new orbital sim.
