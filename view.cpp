@@ -12,6 +12,8 @@
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 
+#define RENDER_3D_DISTANCE 50     // Distance from (0,0,0) that renders in 3D, otherwise it'll render in 2D
+
 /**
  * @brief Converts a timestamp (number of seconds since 1/1/2022)
  *        to an ISO date ("YYYY-MM-DD")
@@ -96,7 +98,7 @@ void renderView(View *view, OrbitalSim *sim)
     
     int i;
 
-    if(Vector3Length(view->camera.position) <= 50) {
+    if(Vector3Length(view->camera.position) <= RENDER_3D_DISTANCE) {
 
         for(i=0 ; i<sim->bodyNumber ; i++) {
             DrawSphere( Vector3Scale(sim->bodies[i].position, 1E-11),     //Scale factor: 1E-11

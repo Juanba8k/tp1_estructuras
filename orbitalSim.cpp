@@ -22,6 +22,8 @@
 #define SISTEM_BODYNUM (SOLARSYSTEM_BODYNUM) //This must be defined with the number of planets in the sistem that will be display
 #define SISTEM_EPHEMERIDES (solarSystem) //This must contain the name of the EphemeridesBody struct which contains the data from all the bodies in the solar sistem that will be display
 
+#define ASTEROID_BODYNUM 500 //Number of asteroids that will be displayed.
+
 /**
  * LOCAL PROTOTPES
  */

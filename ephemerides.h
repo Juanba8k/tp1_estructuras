@@ -29,9 +29,9 @@ struct EphemeridesBody
 EphemeridesBody solarSystem[] = {
     {
         "Sol",
-        1988500E24F,
+        1988500E24F /*  *10  */,  //Mass of a black hole.
         695700E3F,
-        GOLD,
+        GOLD /* BLACK */,   //Color of a black hole.
         {-1.283674643550172E+09F, 2.589397504295033E+07F, 5.007104996950605E+08F},
         {-5.809369653802155E-00F, 2.513455442031695E-01F, -1.461959576560110E+01F},
     },
@@ -69,7 +69,7 @@ EphemeridesBody solarSystem[] = {
     },
     {
         "Jupiter",
-        1898.18722E24F,   
+        1898.18722E24F /*  *1000  */,   //Mass of 1000 Jupiters
         69911E3F,
         BEIGE,
         {6.955554713494443E+11F, -1.444959769995748E+10F, -2.679620040967891E+11F},
@@ -102,7 +102,6 @@ EphemeridesBody solarSystem[] = {
 };
 
 #define SOLARSYSTEM_BODYNUM (sizeof(solarSystem) / sizeof(EphemeridesBody))
-#define ASTEROID_BODYNUM 500
 
 /**
  * Alpha Centauri system ephermerides for 2022-01-01T00:00:00Z
