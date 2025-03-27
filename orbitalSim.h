@@ -11,7 +11,6 @@
 #ifndef ORBITALSIM_H
 #define ORBITALSIM_H
 
-
 #include "raylib.h"
 #include "raymath.h"
 
@@ -20,7 +19,7 @@
  */
 struct OrbitalBody
 {
-    // Fill in your code here...
+    char name[20]; // Name
     float mass;		  // [kg]
     float radius;	  // [m]
     Color color;	  // Raylib color
@@ -33,7 +32,6 @@ struct OrbitalBody
  */
 struct OrbitalSim
 {
-    // Fill in your code here...
     float timeStep, timeTotal;
     int bodyNumber;
     OrbitalBody *bodies;  // Puntero a estructura, se asigna como arreglo de manera dinámica usando new

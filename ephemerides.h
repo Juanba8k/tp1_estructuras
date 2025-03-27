@@ -29,9 +29,9 @@ struct EphemeridesBody
 EphemeridesBody solarSystem[] = {
     {
         "Sol",
-        1988500E24F /*  *10  */,  //Mass of a black hole.
+        1988500E24F,
         695700E3F,
-        GOLD /* BLACK */,   //Color of a black hole.
+        GOLD,
         {-1.283674643550172E+09F, 2.589397504295033E+07F, 5.007104996950605E+08F},
         {-5.809369653802155E-00F, 2.513455442031695E-01F, -1.461959576560110E+01F},
     },
@@ -58,6 +58,14 @@ EphemeridesBody solarSystem[] = {
         BLUE,
         {-2.741147560901964E+10F, 1.907499306293577E+07F, 1.452697499646169E+11F},
         {-2.981801522121922E+04F, 1.781036907294364E00F, -5.415519940416356E+03F},
+    },
+    {
+        "Starship",
+        1E5F,
+        45,
+        GREEN,
+        {-2.741147560901964E+10F + 4E5F, 1.907499306293577E+07F, 1.452697499646169E+11F}, //400km above earth's surface
+        {18580, -18580, 0}, //Velocity that remains after leaving earth's orbit
     },
     {
         "Marte",
@@ -99,6 +107,18 @@ EphemeridesBody solarSystem[] = {
         {4.431790029686977E+12F, -8.954348456482631E+10F, -6.114486878028781E+11F},
         {7.066237951457524E+02F, -1.271365751559108E+02F, 5.417076605926207E+03F},
     },
+
+    /*BONUS: BLACK HOLE https://en.wikipedia.org/wiki/Cygnus_X-1 */
+    /*
+    {
+        "Cygnus X-1",
+        1988500E24F * 21.2F,
+        44000,
+        GREEN,
+        {-2.152570437700128E+12F, 2.039611192913723E+10F, -2.016888245555490E+12F},
+        {27.77F, 27.77F, 27.77F}, // Approximately 100km/h
+    },
+    */
 };
 
 #define SOLARSYSTEM_BODYNUM (sizeof(solarSystem) / sizeof(EphemeridesBody))

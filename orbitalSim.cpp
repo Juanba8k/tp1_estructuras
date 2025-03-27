@@ -12,6 +12,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 #include "orbitalSim.h"
 #include "ephemerides.h"
 
@@ -100,6 +101,7 @@ OrbitalSim *constructOrbitalSim(float timeStep)
     p->centerMass = sistemBody[0].mass; //For the code functioning, the first planet define in Ephemeride sistembody, must be the center mass
     int i;
     for(i=0 ; i < SISTEM_BODYNUM ; i++) {
+        strcpy(p->bodies[i].name, sistemBody[i].name);
         p->bodies[i].mass = sistemBody[i].mass;
         p->bodies[i].radius = sistemBody[i].radius;
         p->bodies[i].color = sistemBody[i].color;
@@ -109,6 +111,7 @@ OrbitalSim *constructOrbitalSim(float timeStep)
     for(i = SISTEM_BODYNUM ; i < (ASTEROID_BODYNUM+SISTEM_BODYNUM) ; i++) { 
         configureAsteroid(& p->bodies[i], p->centerMass);   
     }
+
     return p; // Returns pointer to your new orbital sim.
 }
 
@@ -136,7 +139,7 @@ void updateOrbitalSim(OrbitalSim *sim)
     for (index=0 ; index < sim->bodyNumber ; index++){    //Nota: Usar bodyNumber como cota.
     
         float mass = sim->bodies[index].mass;
-        Vector3 force, aceleration;
+        Vector3 aceleration;
 
         aceleration = calcAcceleration(sim,index); //Calculates aceleration vector
 
@@ -158,7 +161,7 @@ static Vector3 calcAcceleration (OrbitalSim *sim, int index){
 
     for(i=0 ; i < SISTEM_BODYNUM ; i++){ //We don't use the asteroid mass, because it's too small in comparison with the main planets we are studing
 
-        if(i!=index){   //skips so as not to compaire to it self  (no comparar consigo mismo)
+        if(i!=index){   //skips so it doesn't compare itself
             float acceleration;
             float m2 = sim->bodies[i].mass;
 
@@ -177,6 +180,19 @@ static Vector3 calcAcceleration (OrbitalSim *sim, int index){
             normal = Vector3Scale(normal,acceleration);
 
             totalAcceleration = Vector3Add(totalAcceleration, normal);
+        }
+
+        if(sim->bodies->name == "Starship") {   //If theres a body with this name, it'll calculate the acceleration of thrusters.
+            float thruster = 98E3F / sim->bodies->mass; //Thrusters have a force of 98.000 newtons.
+
+            if(IsKeyDown(KEY_EIGHT)) totalAcceleration.x += thruster;
+            if(IsKeyDown(KEY_TWO)) totalAcceleration.x += -thruster;
+
+            if(IsKeyDown(KEY_SIX)) totalAcceleration.y += thruster;
+            if(IsKeyDown(KEY_FOUR)) totalAcceleration.y += -thruster;
+
+            if(IsKeyDown(KEY_TAB)) totalAcceleration.z += thruster;
+            if(IsKeyDown(KEY_LEFT_SHIFT)) totalAcceleration.z += -thruster;
         }
     }
     return totalAcceleration;
