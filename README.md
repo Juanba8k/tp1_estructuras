@@ -2,11 +2,9 @@
 
 ## Integrantes del grupo y contribución al trabajo de cada integrante
 
-* [Nombre]: [contribución]
+    Juan Bautista Correa Uranga: Desarrollo de la función update orbital sim (cálculo de vectores), mejoras en la eficiencia computacional y portabilidad para usarse con otros sistemas solares. Incorporación de asteroides.
 
-    Juan Bautista Correa Uranga: desarrollo de la función update orbital sim, mejoras en la eficiencia y portabilidad para usarse con otros sistemas solares.
-
-    Augusto Milani: Creación de estructuras de datos y inicializacion de los mismos, display, mejoras de eficiencia en el display.
+    Augusto Milani: Creación de estructuras de datos y inicializacion de los mismos, display, mejoras de eficiencia en el display. Incorporación de nave maniobrable y agujero negro.
 
 
 ## Verificación del timestep
@@ -20,7 +18,7 @@ Al trabajar con floats y considerar un time step muy alto, hay overflow, lo que 
 
 ## Complejidad computacional con asteroides
 
-La complejidad computacional del programa es O(N²).
+La complejidad computacional del programa es O(N²), siendo que nuestro código se compone de dos ciclos for para cada cálculo de aceleraciones.
 
 ## Mejora de la complejidad computacional
 
@@ -28,8 +26,11 @@ Despreciamos el efecto de órbita que tienen los asteroides, siendo que su masa 
 Además, al alejar la cámara de manera significativa, los objetos se renderizarán como líneas y no como esferas, a fin de mejorar la velocidad de ejecución. Al hacer esto último, la simulacion corre a 60 fps en ambas compturadoras.
 
 ## Bonus points
-Al multiplicar la masa de Jupiter por 1000, el sol empieza a orbitar alrededor del mismo, y al mismo tiempo todos los otros planetas salen despedidos de la orbita. Al mismo tiempo, como no hay colisiones, los planetas al juntarse, se atraviezan y salen disparados. Si un agujero negro apareciera dentro del sistema solar, todos los planetas (y el sol) abandonarían su órbita para colisionar con él. En ambos casos, la vida en la Tierra es imposible.
+Al multiplicar la masa de Jupiter por 1000, el sol empieza a orbitar alrededor del mismo, y al mismo tiempo todos los otros planetas salen despedidos de su orbita. Al mismo tiempo, como no hay colisiones, los planetas al juntarse, se atraviezan y salen disparados. Si un agujero negro apareciera dentro del sistema solar, todos los planetas (y el sol) abandonarían su órbita para colisionar con él. En ambos casos, la vida en la Tierra es imposible.
 
-El easter egg encontrado se encuentra al cargar los asteroides, permitiendo simularlos sobre un mismo eje (sin desfase).
+El easter egg se encuentra al cargar los asteroides, permitiendo simularlos sobre un mismo eje (sin desfase).
 
 Se crearon dos constantes en orbitalSim.cpp llamadas SISTEM_BODYNUM y SISTEM_EPHEMERIDES, las cuales deben ser cambiadas y permite que el código pueda usarse para simular otros sistemas solares, con planetas diferentes. En este caso se probó también con Alfa Centauri, mostrando dos estrellas que orbitaban en una circunferencia.
+
+Finalmente, se añadió una nave espacial manejable por teclado con las letras I, J, K, L, TAB y LEFT SHIFT. La misma se declara como cuerpo del sistema solar, posicionada cerca de la Tierra y con velocidad en dirección opuesta a su órbita. Los valores utilizados fueron tomados con asistencia de la inteligencia artificial Grok: https://grok.com
+Como curiosidad, pudimos desplazar todo el sistema solar conjunto usando los propulsores definidos al cambiar el índice considerado. También la totalidad de los asteroides sin ninguno de los planetas. 

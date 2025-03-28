@@ -11,6 +11,8 @@
 #include "raylib.h"
 #include "raymath.h"
 
+#define STARSHIP "Nave"
+
 struct EphemeridesBody
 {
     const char *name; // Name
@@ -60,7 +62,7 @@ EphemeridesBody solarSystem[] = {
         {-2.981801522121922E+04F, 1.781036907294364E00F, -5.415519940416356E+03F},
     },
     {
-        "Starship",
+        STARSHIP,
         1E5F,
         45,
         GREEN,

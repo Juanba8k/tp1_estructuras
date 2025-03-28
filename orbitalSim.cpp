@@ -136,7 +136,7 @@ void updateOrbitalSim(OrbitalSim *sim)
     sim->timeTotal += sim->timeStep;
     int index;
 
-    for (index=0 ; index < sim->bodyNumber ; index++){    //Nota: Usar bodyNumber como cota.
+    for (index=0 ; index < sim->bodyNumber ; index++){
     
         float mass = sim->bodies[index].mass;
         Vector3 aceleration;
@@ -184,8 +184,8 @@ static Vector3 calcAcceleration (OrbitalSim *sim, int index){
 
     }
 
-    if(strcmp(sim->bodies[index].name , "Starship") == 0){   //If theres a body with this name, it'll calculate the acceleration of thrusters.
-        float thruster = (98E1F *10 / sim->bodies[index].mass); //Thrusters have a force of 98.000 newtons.
+    if(strcmp(sim->bodies[index].name , STARSHIP) == 0){   //If theres a body with this name, it'll calculate the acceleration of thrusters by keyboard inputs.
+        float thruster = (98E1F / sim->bodies[index].mass); //Thrusters have a force of 98.000 newtons.
 
         if(IsKeyDown(KEY_L)) totalAcceleration.x += thruster;
         if(IsKeyDown(KEY_J)) totalAcceleration.x += -thruster;
