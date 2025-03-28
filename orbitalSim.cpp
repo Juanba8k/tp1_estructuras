@@ -159,7 +159,7 @@ static Vector3 calcAcceleration (OrbitalSim *sim, int index){
     int i;
     Vector3 totalAcceleration = Vector3Zero();
 
-    for(i=0 ; i < SISTEM_BODYNUM ; i++){ //We don't use the asteroid mass, because it's too small in comparison with the main planets we are studing
+    for(i=0 ; i < SISTEM_BODYNUM ; i++){ //We don't use the asteroid mass, because it's too small compared with the main planets we are studing
 
         if(i!=index){   //skips so it doesn't compare itself
             float acceleration;
@@ -179,22 +179,23 @@ static Vector3 calcAcceleration (OrbitalSim *sim, int index){
             normal = Vector3Normalize(normal);
             normal = Vector3Scale(normal,acceleration);
 
-            if(strcmp(sim->bodies->name , "Starship") == 0){   //If theres a body with this name, it'll calculate the acceleration of thrusters.
-                float thruster = (98E3F / sim->bodies->mass); //Thrusters have a force of 98.000 newtons.
-    
-                if(IsKeyDown(KEY_EIGHT)) totalAcceleration.x += thruster;
-                if(IsKeyDown(KEY_TWO)) totalAcceleration.x += -thruster;
-    
-                if(IsKeyDown(KEY_SIX)) totalAcceleration.y += thruster;
-                if(IsKeyDown(KEY_FOUR)) totalAcceleration.y += -thruster;
-    
-                if(IsKeyDown(KEY_TAB)) totalAcceleration.z += thruster;
-                if(IsKeyDown(KEY_LEFT_SHIFT)) totalAcceleration.z += -thruster;
-            }
-
             totalAcceleration = Vector3Add(totalAcceleration, normal);
         }
 
     }
+
+    if(strcmp(sim->bodies[index].name , "Starship") == 0){   //If theres a body with this name, it'll calculate the acceleration of thrusters.
+        float thruster = (98E1F / sim->bodies[index].mass); //Thrusters have a force of 98.000 newtons.
+
+        if(IsKeyDown(KEY_L)) totalAcceleration.x += thruster;
+        if(IsKeyDown(KEY_J)) totalAcceleration.x += -thruster;
+
+        if(IsKeyDown(KEY_TAB)) totalAcceleration.y += thruster;
+        if(IsKeyDown(KEY_LEFT_SHIFT)) totalAcceleration.y += -thruster;
+
+        if(IsKeyDown(KEY_I)) totalAcceleration.z += thruster;
+        if(IsKeyDown(KEY_K)) totalAcceleration.z += -thruster;
+    }
+
     return totalAcceleration;
 }
