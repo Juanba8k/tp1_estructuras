@@ -179,21 +179,22 @@ static Vector3 calcAcceleration (OrbitalSim *sim, int index){
             normal = Vector3Normalize(normal);
             normal = Vector3Scale(normal,acceleration);
 
+            if(strcmp(sim->bodies->name , "Starship") == 0){   //If theres a body with this name, it'll calculate the acceleration of thrusters.
+                float thruster = (98E3F / sim->bodies->mass); //Thrusters have a force of 98.000 newtons.
+    
+                if(IsKeyDown(KEY_EIGHT)) totalAcceleration.x += thruster;
+                if(IsKeyDown(KEY_TWO)) totalAcceleration.x += -thruster;
+    
+                if(IsKeyDown(KEY_SIX)) totalAcceleration.y += thruster;
+                if(IsKeyDown(KEY_FOUR)) totalAcceleration.y += -thruster;
+    
+                if(IsKeyDown(KEY_TAB)) totalAcceleration.z += thruster;
+                if(IsKeyDown(KEY_LEFT_SHIFT)) totalAcceleration.z += -thruster;
+            }
+
             totalAcceleration = Vector3Add(totalAcceleration, normal);
         }
 
-        if(sim->bodies->name == "Starship") {   //If theres a body with this name, it'll calculate the acceleration of thrusters.
-            float thruster = 98E3F / sim->bodies->mass; //Thrusters have a force of 98.000 newtons.
-
-            if(IsKeyDown(KEY_EIGHT)) totalAcceleration.x += thruster;
-            if(IsKeyDown(KEY_TWO)) totalAcceleration.x += -thruster;
-
-            if(IsKeyDown(KEY_SIX)) totalAcceleration.y += thruster;
-            if(IsKeyDown(KEY_FOUR)) totalAcceleration.y += -thruster;
-
-            if(IsKeyDown(KEY_TAB)) totalAcceleration.z += thruster;
-            if(IsKeyDown(KEY_LEFT_SHIFT)) totalAcceleration.z += -thruster;
-        }
     }
     return totalAcceleration;
 }
