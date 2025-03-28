@@ -185,7 +185,7 @@ static Vector3 calcAcceleration (OrbitalSim *sim, int index){
     }
 
     if(strcmp(sim->bodies[index].name , "Starship") == 0){   //If theres a body with this name, it'll calculate the acceleration of thrusters.
-        float thruster = (98E1F / sim->bodies[index].mass); //Thrusters have a force of 98.000 newtons.
+        float thruster = (98E1F *10 / sim->bodies[index].mass); //Thrusters have a force of 98.000 newtons.
 
         if(IsKeyDown(KEY_L)) totalAcceleration.x += thruster;
         if(IsKeyDown(KEY_J)) totalAcceleration.x += -thruster;
